@@ -1,4 +1,4 @@
-package kata4;
+package kata6;
 
 public class Mail {
     private final String mail;

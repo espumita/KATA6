@@ -1,4 +1,4 @@
-package kata4;
+package kata6;
 
 import java.awt.Container;
 import java.awt.Dimension;
@@ -9,12 +9,14 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.ui.ApplicationFrame;
 
-public class HistogramDisplay extends ApplicationFrame{
-    private final Histogram<String> histogram;
+public class HistogramDisplay <T> extends ApplicationFrame{
+    private final Histogram<T> histogram;
+    private final String nameEjeX;
 
-    public HistogramDisplay(Histogram<String> histogram) {
+    public HistogramDisplay(Histogram<T> histogram, String nameEjeX) {
         super("HISTOGRAM");
         this.histogram = histogram;
+        this.nameEjeX = nameEjeX;
         setContentPane(createPanel());
         pack();
     }
@@ -28,8 +30,8 @@ public class HistogramDisplay extends ApplicationFrame{
     private JFreeChart createChart(DefaultCategoryDataset dataset){
         JFreeChart chart = ChartFactory.createBarChart(
                     null,
-                    "Dominios",
-                    "nº emails",
+                    nameEjeX,
+                    "NUMERO",
                     dataset,
                     PlotOrientation.VERTICAL,
                     false, false, false);
@@ -38,8 +40,8 @@ public class HistogramDisplay extends ApplicationFrame{
     
     private DefaultCategoryDataset createDataset(){
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        for (String key : histogram.keySet()) {
-            dataset.addValue(histogram.get(key), "", key);
+        for (T key : histogram.keySet()) {
+            dataset.addValue(histogram.get(key), "", (Comparable) key);
         }
         return dataset;
     }

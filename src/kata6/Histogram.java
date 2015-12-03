@@ -1,4 +1,4 @@
-package kata4;
+package kata6;
 
 import java.util.HashMap;
 import java.util.Set;
